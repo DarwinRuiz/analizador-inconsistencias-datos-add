@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalles de Errores</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+
+<body>
+    <div class="mx-3 mt-4">
+        <h1>Detalles de Errores Encontrados</h1>
+        <a href="javascript:window.history.back();" class="btn btn-primary mt-3"><i class="bi bi-arrow-left"></i>
+            Volver</a>
+
+
+        <div class="row mt-4">
+            {% for inconsistency in inconsistencies %}
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <strong>{{ inconsistency.message }}</strong>
+                    </div>
+                    <div class="card-body">
+                        <p>Detalles:</p>
+                        <ul>
+                            {% for item in inconsistency.details %}
+                            <li>
+                                <strong>{{ item.track_name }} - {{ item['artist(s)_name'] }}</strong><br>
+                                URL de la imagen: {{ item.cover_url }}<br>
+                                BPM: {{ item.bpm }}<br>
+                                Energía: {{ item['energy_%'] }}<br>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            {% else %}
+            <div class="col-12">
+                <div class="alert alert-info">
+                    No se encontraron inconsistencias en los datos.
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
